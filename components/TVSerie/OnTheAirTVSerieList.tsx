@@ -14,8 +14,8 @@ const OnTheAirTVSerieList = () => {
   const { region } = useRegionStore();
 
   const { isLoading, error, data } = useQuery({
-    queryKey: ["getOnTheAirTVSerieList", language, region],
-    queryFn: () => fetchOnTheAirTVSeries(language, 1, region),
+    queryKey: ["getOnTheAirTVSerieList", language],
+    queryFn: () => fetchOnTheAirTVSeries(language, 1),
     staleTime: Infinity,
   });
 

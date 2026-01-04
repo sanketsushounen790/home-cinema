@@ -4,7 +4,6 @@ import { Heart } from "lucide-react";
 import { useUser } from "@/hooks/useUser";
 
 import { useCommentLikes } from "@/hooks/useCommentLikes";
-import clsx from "clsx";
 import { toggleLikeComment } from "./like.actions";
 
 interface CommentLikeButtonProps {

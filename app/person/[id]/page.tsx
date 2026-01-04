@@ -1,5 +1,4 @@
 import PersonDetail from "@/components/Person/PersonDetail";
-import TComponent from "@/components/Person/TComponent";
 
 interface PersonDetailPageProps {
   params: {
