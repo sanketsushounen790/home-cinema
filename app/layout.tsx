@@ -4,7 +4,7 @@ import "./globals.css";
 import ThemeProvider from "@/store/themeProvider";
 
 export const metadata = {
-  title: "MovieApp",
+  title: "HomeCinema",
   description: "Your movie discovery app",
 };
 
