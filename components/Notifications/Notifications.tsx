@@ -18,6 +18,8 @@ const Notifications = () => {
   const { theme } = useThemeStore();
   const notifications = useNotifications(user?.uid);
 
+  console.log(notifications);
+
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
   const sortedNotifications = [...notifications].sort((a, b) => {
@@ -42,10 +44,27 @@ const Notifications = () => {
       commentParam = `${n.commentId}_${n.replyId}`;
     }
 
-    const mediaType = n.postId.split("_")[0];
-    const mediaId = n.postId.split("_")[1];
+    let mediaId = "";
 
-    router.push(`/${mediaType}/${mediaId}/watch?comment=${commentParam}`);
+    const mediaType = n.postId.split("_")[0];
+    if (mediaType === "movie") {
+      mediaId = n.postId.split("_")[1];
+
+      router.push(`/${mediaType}/${mediaId}/watch?comment=${commentParam}`);
+    } else {
+      mediaId = n.postId.split("_")[1];
+      const tvSeasonId = n.postId.split("_")[2];
+      const tvEpisodeId = n.postId.split("_")[3];
+      const tvEpisodeIndex = String(
+        Number(tvEpisodeId) >= 1
+          ? Number(tvEpisodeId) - 1
+          : Number(tvEpisodeId),
+      );
+
+      router.push(
+        `/${mediaType}/${mediaId}/season/${tvSeasonId}/episode/${tvEpisodeId}_${tvEpisodeIndex}?comment=${commentParam}`,
+      );
+    }
   };
 
   console.log(notifications);
@@ -65,10 +84,10 @@ const Notifications = () => {
             transition
             ${
               n.read
-                ? theme === "light"
+                ? "bg-transparent"
+                : theme === "light"
                   ? "bg-blue-100"
                   : "bg-base-300"
-                : "bg-transparent"
             }
             ${theme === "light" ? "hover:bg-blue-200" : "hover:bg-gray-800"}
           `}

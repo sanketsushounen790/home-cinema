@@ -55,7 +55,7 @@ const TVSerieDetail = ({ tvId, credits }: TVSerieDetailProps) => {
   const [currentRegionISOCode, setCurrentRegionISOCode] = useState("US");
   const [selected, setSelected] = useState<CountryRegion>(countryRegions["US"]);
   const [selectedCountryCertificate, setSelectedCountryCertificate] = useState(
-    countryTVSerieCertificates["US"]
+    countryTVSerieCertificates["US"],
   );
 
   const handleSelect = (regionCode: string) => {
@@ -193,8 +193,8 @@ const TVSerieDetail = ({ tvId, credits }: TVSerieDetailProps) => {
                        result.vote_average >= 7
                          ? "text-green-400 border-green-400"
                          : result.vote_average >= 5
-                         ? "text-yellow-400 border-yellow"
-                         : "text-red-400 border-red"
+                           ? "text-yellow-400 border-yellow"
+                           : "text-red-400 border-red"
                      } `}
                     aria-label={`rating ${result.vote_average}`}
                   >
@@ -497,7 +497,7 @@ const TVSerieDetail = ({ tvId, credits }: TVSerieDetailProps) => {
                     <p>
                       {result.episode_run_time[0] > 60
                         ? convertMinutesToHoursAndMinutes(
-                            result.episode_run_time[0]
+                            result.episode_run_time[0],
                           )
                         : `${result.episode_run_time[0]}m`}
                     </p>
@@ -519,7 +519,10 @@ const TVSerieDetail = ({ tvId, credits }: TVSerieDetailProps) => {
                 </div>
 
                 <div className="w-full flex justify-start items-center">
-                  <LastEpisodeToAirItem ep={result.last_episode_to_air} />
+                  <LastEpisodeToAirItem
+                    tvId={tvId}
+                    ep={result.last_episode_to_air}
+                  />
                 </div>
               </div>
             </div>

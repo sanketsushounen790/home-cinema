@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "@/lib/firebase/client";
 import { useUser } from "@/hooks/useUser";
 import { CommentForm } from "./CommentForm";
@@ -11,6 +11,7 @@ import { LikedUsers } from "./LikedUsers";
 import Image from "next/image";
 import { CommentLikeActions } from "./CommentLikeActions";
 import { softDeleteComment } from "./comment.actions";
+import { useThemeStore } from "@/store/themeStore";
 
 export function CommentItem({
   comment,
@@ -29,6 +30,8 @@ export function CommentItem({
     : comment.id === rootCommentId;
 
   const { user } = useUser();
+  const { theme } = useThemeStore();
+
   const isOwner = user?.uid === comment.userId;
 
   const [editing, setEditing] = useState(false);
@@ -51,18 +54,23 @@ export function CommentItem({
   const handleUpdate = async () => {
     await updateDoc(doc(db, "comments", comment.id), {
       content: text,
-      updatedAt: new Date(),
+      updatedAt: serverTimestamp(),
     });
+
     setEditing(false);
   };
 
+  //console.log(comment);
+
   return (
-    <div id={`comment-${comment.id}`} className={`border-l-1`}>
+    <div id={`comment-${comment.id}`} className="border-l-1">
       {isChildren && !isHighlight && (
         <div className="w-12 flex items-center justify-center border-t-1 ml-[-41px]"></div>
       )}
 
-      <div className={`${isHighlight ? "bg-blue-100" : ""}`}>
+      <div
+        className={`${isHighlight ? (theme === "dark" ? "bg-gray-700 hover:bg-gray-800 cursor-pointer" : "bg-gray-200 hover:bg-gray-300 cursor-pointer") : ""}`}
+      >
         <div className="flex items-center gap-2 ml-[-25px] mt-[-25px]">
           <Image
             src={comment.userPhoto}
@@ -80,7 +88,7 @@ export function CommentItem({
           </div>
         </div>
 
-        <div className={`pt-2 pb-2 mb-10`}>
+        <div className={`pt-2 mb-10`}>
           {comment.deleted ? (
             <div className="italic text-sm text-gray-500 p-2 ml-4 bg-base-300 shadow-xl">
               Bình luận đã bị xoá
@@ -113,7 +121,7 @@ export function CommentItem({
                 {user && user.uid !== comment.userId && (
                   <button
                     onClick={() => setReplyOpen(!replyOpen)}
-                    className="cursor-pointer hover:bg-gray-300 px-1"
+                    className={`cursor-pointer px-1 ${theme === "light" ? "hover:bg-gray-300" : "hover:bg-gray-700"}`}
                   >
                     Trả lời
                   </button>
@@ -123,14 +131,14 @@ export function CommentItem({
                   <>
                     <button
                       onClick={() => setEditing(true)}
-                      className="cursor-pointer hover:bg-gray-300 px-1"
+                      className={`cursor-pointer px-1 ${theme === "light" ? "hover:bg-gray-300" : "hover:bg-gray-700"}`}
                     >
                       Sửa
                     </button>
 
                     <button
                       onClick={handleDelete}
-                      className="cursor-pointer text-red-500 hover:bg-gray-300 px-1"
+                      className={`cursor-pointer text-red-500 px-1 ${theme === "light" ? "hover:bg-gray-300" : "hover:bg-gray-700"}`}
                     >
                       Xoá
                     </button>

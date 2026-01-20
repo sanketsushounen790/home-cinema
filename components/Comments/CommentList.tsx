@@ -14,23 +14,30 @@ import { CommentItem } from "./CommentItem";
 
 export function CommentList({
   postId,
+  seasonId,
+  episodeId,
   rootCommentId,
   focusCommentId,
 }: {
   postId: string;
+  seasonId?: string;
+  episodeId?: string;
   rootCommentId?: string;
   focusCommentId?: string;
 }) {
-  console.log("rootCommentId", rootCommentId);
-  console.log("focusCommentId", focusCommentId);
+  // console.log("rootCommentId", rootCommentId);
+  // console.log("focusCommentId", focusCommentId);
+  const itemId =
+    seasonId && episodeId ? `${postId}_${seasonId}_${episodeId}` : postId;
+  // console.log("itemId", itemId);
   const [comments, setComments] = useState<any[]>([]);
 
   /* ================= FETCH ================= */
   useEffect(() => {
     const q = query(
       collection(db, "comments"),
-      where("postId", "==", postId),
-      orderBy("createdAt", "asc")
+      where("postId", "==", itemId),
+      orderBy("createdAt", "asc"),
     );
 
     return onSnapshot(q, (snap) => {
@@ -38,7 +45,7 @@ export function CommentList({
         snap.docs.map((d) => ({
           id: d.id,
           ...d.data(),
-        }))
+        })),
       );
     });
   }, [postId]);
@@ -88,7 +95,7 @@ export function CommentList({
 
   return (
     <div className="space-y-4">
-      <CommentForm postId={postId} />
+      <CommentForm postId={postId} seasonId={seasonId} episodeId={episodeId} />
 
       <div className="mt-12 space-y-6">
         {/* ================= FOCUS MODE ================= */}

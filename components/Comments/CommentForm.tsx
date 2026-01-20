@@ -6,10 +6,14 @@ import { addComment, addReply } from "./comment.actions";
 
 export function CommentForm({
   postId,
+  seasonId,
+  episodeId,
   parentId,
   onDone,
 }: {
   postId: string;
+  seasonId?: string;
+  episodeId?: string;
   parentId?: string | null;
   onDone?: () => void;
 }) {
@@ -19,15 +23,27 @@ export function CommentForm({
 
   if (!user) return null;
 
+  const itemId =
+    seasonId && episodeId ? `${postId}_${seasonId}_${episodeId}` : postId;
+
   const handleSubmit = async () => {
     if (!text.trim()) return;
 
     setLoading(true);
 
     if (parentId) {
-      await addReply({ postId, parentId, content: text, user });
+      await addReply({
+        postId: itemId,
+        parentId,
+        content: text,
+        user,
+      });
     } else {
-      await addComment({ postId, content: text, user });
+      await addComment({
+        postId: itemId,
+        content: text,
+        user,
+      });
     }
 
     setText("");

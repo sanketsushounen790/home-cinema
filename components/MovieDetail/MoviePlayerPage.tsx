@@ -12,10 +12,10 @@ const MoviePlayerPage = ({
   focusCommentId,
 }: MoviePlayerPageProps) => {
   return (
-    <div className="w-full h-auto min-h-[100vh] flex flex-col justify-center items-center py-5 px-5">
+    <div className="w-full h-auto min-h-[100vh] flex flex-col justify-center items-center pb-5 px-5">
       {/* PLAYER */}
-      <div className="w-full h-auto flex justify-center items-center">
-        <div className="w-full max-w-5xl aspect-video">
+      <div className="w-[75%] h-auto flex justify-center items-start mt-5">
+        <div className="w-full aspect-video">
           <iframe
             className="w-full h-full"
             src={`https://www.2embed.cc/embed/${movieId}`}
@@ -27,7 +27,7 @@ const MoviePlayerPage = ({
         </div>
       </div>
 
-      <div className="w-[90%] mt-6">
+      <div className="w-[90%] mt-7">
         <CommentBox
           postId={`movie_${movieId}`}
           focusCommentId={focusCommentId}

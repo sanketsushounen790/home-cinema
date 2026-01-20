@@ -14,7 +14,7 @@ interface EpisodeWatchPageProps {
   focusCommentId?: string;
   seasondId: string;
   episodeId: string;
-  episodeIndex: number;
+  episodeIndex: number; // index để lấy episode ra từ mảng episode của result fetch season
 }
 
 const EpisodeWatchPage = ({
@@ -31,10 +31,10 @@ const EpisodeWatchPage = ({
 
   const { data: result, isLoading: isResultLoading } = useSeasonDetail(
     tvId,
-    seasondId
+    seasondId,
   );
 
-  console.log("result", result);
+  //console.log("result", result);
 
   const [currentEpCredits, setCurrentEpCredits] = useState(credits);
 
@@ -89,7 +89,7 @@ const EpisodeWatchPage = ({
               .filter(
                 (ep) =>
                   ep.air_date !== null &&
-                  new Date(ep.air_date).getTime() <= today
+                  new Date(ep.air_date).getTime() <= today,
               )
               .map((ep, index) => (
                 <div
@@ -105,7 +105,7 @@ const EpisodeWatchPage = ({
                   }`}
                   onClick={() => {
                     router.push(
-                      `/tv/${tvId}/season/${seasondId}/episode/${ep.episode_number}_${index}`
+                      `/tv/${tvId}/season/${seasondId}/episode/${ep.episode_number}_${index}`,
                     );
                   }}
                 >

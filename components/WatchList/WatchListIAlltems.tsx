@@ -19,6 +19,7 @@ import { useUpdateWatchlist } from "@/hooks/useUpdateWatchlist";
 import { useUser } from "@/hooks/useUser";
 import { isMovie, isTV } from "@/utils/knownFor";
 import TVSerieWatchlistItemCard from "../TVSerie/TVSerieWatchlistItemCard";
+import { useThemeStore } from "@/store/themeStore";
 
 interface WatchListIAlltemsProps {
   watchlistId: string;
@@ -27,6 +28,7 @@ interface WatchListIAlltemsProps {
 const WatchListIAlltems = ({ watchlistId }: WatchListIAlltemsProps) => {
   const router = useRouter();
   const { user } = useUser();
+  const { theme } = useThemeStore();
 
   const [openNewTitle, setOpenNewTitle] = useState<boolean>(false);
   const [newTitle, setNewTitle] = useState<string>("");
@@ -64,7 +66,7 @@ const WatchListIAlltems = ({ watchlistId }: WatchListIAlltemsProps) => {
     // 1️⃣ Tìm route tiếp theo TRƯỚC khi xoá
     const nextId = getNextWatchlistId(
       watchlistsSummary?.list || [],
-      watchlist?.id as string
+      watchlist?.id as string,
     );
 
     // 2️⃣ Xoá
@@ -74,7 +76,7 @@ const WatchListIAlltems = ({ watchlistId }: WatchListIAlltemsProps) => {
     if (nextId) {
       const nextWatchlist = getNextWatchlistData(
         watchlistsSummary?.list || [],
-        watchlist?.id as string
+        watchlist?.id as string,
       );
 
       setWatchlist(nextWatchlist);
@@ -109,7 +111,7 @@ const WatchListIAlltems = ({ watchlistId }: WatchListIAlltemsProps) => {
                 <div key={item} className="w-full">
                   <LoadingCard />
                 </div>
-              )
+              ),
             )}
           </div>
         </div>
@@ -170,7 +172,7 @@ const WatchListIAlltems = ({ watchlistId }: WatchListIAlltemsProps) => {
                     <Edit
                       size={18}
                       className="hover:scale-110 transition-transform cursor-pointer"
-                      color="blue"
+                      color={theme === "dark" ? "cyan" : "blue"}
                     />
                   </div>
                 )}
@@ -194,7 +196,7 @@ const WatchListIAlltems = ({ watchlistId }: WatchListIAlltemsProps) => {
             <div className="text-sm">
               Created at{" "}
               {formatTimestamp(
-                watchlistsSummary.map[watchlistId]?.createdAt as number
+                watchlistsSummary.map[watchlistId]?.createdAt as number,
               )}
             </div>
           </div>

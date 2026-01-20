@@ -164,10 +164,10 @@ const TVSerieSeason = ({ result }: TVSerieSeasonProps) => {
                        season?.vote_average >= 7
                          ? "text-green-400 border-green-400"
                          : season?.vote_average >= 5
-                         ? "text-yellow-400 border-yellow"
-                         : season?.vote_average === 0
-                         ? "text-gray-400 border-gray-400"
-                         : "text-red-400 border-red"
+                           ? "text-yellow-400 border-yellow"
+                           : season?.vote_average === 0
+                             ? "text-gray-400 border-gray-400"
+                             : "text-red-400 border-red"
                      } `}
                     aria-label={`rating ${season?.vote_average}`}
                   >
@@ -200,7 +200,7 @@ const TVSerieSeason = ({ result }: TVSerieSeasonProps) => {
                             ? "Special"
                             : season.season_number
                         } of ${result.name} premiered on ${formatDate(
-                          season.air_date
+                          season.air_date,
                         )}.`
                       : season.overview}
                   </div>
@@ -214,7 +214,7 @@ const TVSerieSeason = ({ result }: TVSerieSeasonProps) => {
                     </Link>
 
                     <Link
-                      href={`/tv/${result.id}/season/${season.season_number}/episode/1`}
+                      href={`/tv/${result.id}/season/${season.season_number}/episode/1_0`}
                       className="hover:underline cursor-pointer"
                     >
                       <button className="btn btn-outline">Watch Now</button>

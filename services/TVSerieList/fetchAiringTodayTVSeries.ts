@@ -1,6 +1,6 @@
 const fetchAiringTodayTVSeries = async (
   language: string,
-  page: number | string
+  page: number | string,
 ) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_TMDB_API_URL}/tv/airing_today?language=${language}&page=${page}`,
@@ -10,8 +10,7 @@ const fetchAiringTodayTVSeries = async (
         accept: "application/json",
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_JWT}`,
       },
-      cache: "force-cache",
-    }
+    },
   );
 
   if (!res.ok) {

@@ -22,7 +22,7 @@ export default function WatchTabs({
   rootCommentId,
   focusCommentId,
 }: WatchTabsProps) {
-  const [activeTab, setActiveTab] = useState<"info" | "comments">("info");
+  const [activeTab, setActiveTab] = useState<"info" | "comments">("comments");
 
   console.log(episode);
 
@@ -225,6 +225,8 @@ export default function WatchTabs({
             {/* Placeholder comments */}
             <TVCommentBox
               postId={`tv_${tvId}`}
+              seasonId={String(episode.season_number)}
+              episodeId={String(episode.episode_number)}
               focusCommentId={focusCommentId}
               rootCommentId={rootCommentId}
             />
