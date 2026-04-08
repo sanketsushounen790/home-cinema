@@ -117,81 +117,83 @@ const MovieCarousel = () => {
               >
                 {movies?.results.map((movie) => (
                   <SwiperSlide key={movie.title}>
-                    <div className="relative w-full h-[500px] group overflow-hidden rounded-2xl">
-                      {/* Background image */}
-                      <img
-                        src={`https://media.themoviedb.org/t/p/w1920_and_h800_multi_faces${movie.backdrop_path}`}
-                        alt={movie.title}
-                        className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                      />
+                    <Link href={`/movie/${movie.id}`}>
+                      <div className="relative w-full h-[500px] group overflow-hidden rounded-2xl">
+                        {/* Background image */}
+                        <img
+                          src={`https://media.themoviedb.org/t/p/w1920_and_h800_multi_faces${movie.backdrop_path}`}
+                          alt={movie.title}
+                          className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                        />
 
-                      {/* Play overlay button (hiện khi hover) */}
-                      <div className="absolute inset-0 flex items-center justify-center opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500">
-                        <button className="w-16 h-16 rounded-full bg-gray-600/80 hover:bg-gray-400/80 border border-white/30 flex items-center justify-center backdrop-blur-sm transition">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="white"
-                            viewBox="0 0 24 24"
-                            strokeWidth={0}
-                            stroke="currentColor"
-                            className="w-8 h-8 ml-1"
-                          >
-                            <path d="M5 3l14 9-14 9V3z" />
-                          </svg>
-                        </button>
-                      </div>
+                        {/* Play overlay button (hiện khi hover) */}
+                        <div className="absolute inset-0 flex items-center justify-center opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500">
+                          <button className="w-16 h-16 rounded-full bg-gray-600/80 hover:bg-gray-400/80 border border-white/30 flex items-center justify-center backdrop-blur-sm transition">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="white"
+                              viewBox="0 0 24 24"
+                              strokeWidth={0}
+                              stroke="currentColor"
+                              className="w-8 h-8 ml-1"
+                            >
+                              <path d="M5 3l14 9-14 9V3z" />
+                            </svg>
+                          </button>
+                        </div>
 
-                      {/* Gradient overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-all duration-500 group-hover:from-black/95 group-hover:via-black/70" />
+                        {/* Gradient overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-all duration-500 group-hover:from-black/95 group-hover:via-black/70" />
 
-                      {/* Text content */}
-                      <div className="absolute bottom-0 left-0 p-10 max-w-2xl text-white transition-all duration-500 group-hover:translate-y-[-10px]">
-                        {/* Title */}
-                        <h2 className="text-4xl font-bold mb-2 drop-shadow-lg">
-                          {movie.title}
-                        </h2>
+                        {/* Text content */}
+                        <div className="absolute bottom-0 left-0 p-10 max-w-2xl text-white transition-all duration-500 group-hover:translate-y-[-10px]">
+                          {/* Title */}
+                          <h2 className="text-4xl font-bold mb-2 drop-shadow-lg">
+                            {movie.title} ({movie.release_date.slice(0, 4)})
+                          </h2>
 
-                        <div className="flex justify-start items-center gap-2">
-                          {/* Rating badge */}
-                          <div
-                            className={` w-[45px] h-[45px] rounded-full
+                          <div className="flex justify-start items-center gap-2">
+                            {/* Rating badge */}
+                            <div
+                              className={` w-[45px] h-[45px] rounded-full
                      flex items-center justify-center font-semibold text-sm
                      shadow-[0_8px_20px_rgba(0,0,0,0.35)]
                      border-2 bg-black ${
                        movie.vote_average >= 7
                          ? "text-green-400 border-green-400"
                          : movie.vote_average >= 5
-                         ? "text-yellow-400 border-yellow"
-                         : "text-red-400 border-red"
+                           ? "text-yellow-400 border-yellow"
+                           : "text-red-400 border-red"
                      } `}
-                            aria-label={`rating ${movie.vote_average}`}
-                          >
-                            {roundUpToDecimal(movie.vote_average, 1)}
+                              aria-label={`rating ${movie.vote_average}`}
+                            >
+                              {roundUpToDecimal(movie.vote_average, 1)}
+                            </div>
+
+                            {/* Genres dưới dạng chip */}
+                            <div className="flex flex-wrap gap-2">
+                              {movie.genre_ids?.map((genre, index) => (
+                                <Link
+                                  key={index}
+                                  href={`/genre/movie/${genre}-${movieGenresMap.get(
+                                    genre,
+                                  )}`}
+                                >
+                                  <div className="px-3 py-1 text-sm font-medium bg-white/10 hover:bg-white/20 rounded-full border border-white/20 backdrop-blur-sm transition">
+                                    {movieGenresMap.get(genre)}
+                                  </div>
+                                </Link>
+                              ))}
+                            </div>
                           </div>
 
-                          {/* Genres dưới dạng chip */}
-                          <div className="flex flex-wrap gap-2">
-                            {movie.genre_ids?.map((genre, index) => (
-                              <Link
-                                key={index}
-                                href={`/genre/movie/${genre}-${movieGenresMap.get(
-                                  genre
-                                )}`}
-                              >
-                                <div className="px-3 py-1 text-sm font-medium bg-white/10 hover:bg-white/20 rounded-full border border-white/20 backdrop-blur-sm transition">
-                                  {movieGenresMap.get(genre)}
-                                </div>
-                              </Link>
-                            ))}
-                          </div>
+                          {/* Overview */}
+                          <p className="text-sm text-gray-200 mt-2 line-clamp-3">
+                            {movie.overview}
+                          </p>
                         </div>
-
-                        {/* Overview */}
-                        <p className="text-sm text-gray-200 mt-2 line-clamp-3">
-                          {movie.overview}
-                        </p>
                       </div>
-                    </div>
+                    </Link>
                   </SwiperSlide>
                 ))}
 
@@ -283,81 +285,83 @@ const MovieCarousel = () => {
               >
                 {tvSeries?.results.map((tv) => (
                   <SwiperSlide key={tv.name}>
-                    <div className="relative w-full h-[500px] group overflow-hidden rounded-2xl">
-                      {/* Background image */}
-                      <img
-                        src={`https://media.themoviedb.org/t/p/w1920_and_h800_multi_faces${tv.backdrop_path}`}
-                        alt={tv.name}
-                        className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                      />
+                    <Link href={`/tv/${tv.id}`}>
+                      <div className="relative w-full h-[500px] group overflow-hidden rounded-2xl">
+                        {/* Background image */}
+                        <img
+                          src={`https://media.themoviedb.org/t/p/w1920_and_h800_multi_faces${tv.backdrop_path}`}
+                          alt={tv.name}
+                          className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                        />
 
-                      {/* Play overlay button (hiện khi hover) */}
-                      <div className="absolute inset-0 flex items-center justify-center opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500">
-                        <button className="w-16 h-16 rounded-full bg-gray-600/80 hover:bg-gray-400/80 border border-white/30 flex items-center justify-center backdrop-blur-sm transition">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="white"
-                            viewBox="0 0 24 24"
-                            strokeWidth={0}
-                            stroke="currentColor"
-                            className="w-8 h-8 ml-1"
-                          >
-                            <path d="M5 3l14 9-14 9V3z" />
-                          </svg>
-                        </button>
-                      </div>
+                        {/* Play overlay button (hiện khi hover) */}
+                        <div className="absolute inset-0 flex items-center justify-center opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500">
+                          <button className="w-16 h-16 rounded-full bg-gray-600/80 hover:bg-gray-400/80 border border-white/30 flex items-center justify-center backdrop-blur-sm transition">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="white"
+                              viewBox="0 0 24 24"
+                              strokeWidth={0}
+                              stroke="currentColor"
+                              className="w-8 h-8 ml-1"
+                            >
+                              <path d="M5 3l14 9-14 9V3z" />
+                            </svg>
+                          </button>
+                        </div>
 
-                      {/* Gradient overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-all duration-500 group-hover:from-black/95 group-hover:via-black/70" />
+                        {/* Gradient overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-all duration-500 group-hover:from-black/95 group-hover:via-black/70" />
 
-                      {/* Text content */}
-                      <div className="absolute bottom-0 left-0 p-10 max-w-2xl text-white transition-all duration-500 group-hover:translate-y-[-10px]">
-                        {/* Title */}
-                        <h2 className="text-4xl font-bold mb-2 drop-shadow-lg">
-                          {tv.name}
-                        </h2>
+                        {/* Text content */}
+                        <div className="absolute bottom-0 left-0 p-10 max-w-2xl text-white transition-all duration-500 group-hover:translate-y-[-10px]">
+                          {/* Title */}
+                          <h2 className="text-4xl font-bold mb-2 drop-shadow-lg">
+                            {tv.name} ({tv.first_air_date.slice(0, 4)})
+                          </h2>
 
-                        <div className="flex justify-start items-center gap-2">
-                          {/* Rating badge */}
-                          <div
-                            className={` w-[45px] h-[45px] rounded-full
+                          <div className="flex justify-start items-center gap-2">
+                            {/* Rating badge */}
+                            <div
+                              className={` w-[45px] h-[45px] rounded-full
                      flex items-center justify-center font-semibold text-sm
                      shadow-[0_8px_20px_rgba(0,0,0,0.35)]
                      border-2 bg-black ${
                        tv.vote_average >= 7
                          ? "text-green-400 border-green-400"
                          : tv.vote_average >= 5
-                         ? "text-yellow-400 border-yellow"
-                         : "text-red-400 border-red"
+                           ? "text-yellow-400 border-yellow"
+                           : "text-red-400 border-red"
                      } `}
-                            aria-label={`rating ${tv.vote_average}`}
-                          >
-                            {roundUpToDecimal(tv.vote_average, 1)}
+                              aria-label={`rating ${tv.vote_average}`}
+                            >
+                              {roundUpToDecimal(tv.vote_average, 1)}
+                            </div>
+
+                            {/* Genres dưới dạng chip */}
+                            <div className="flex flex-wrap gap-2">
+                              {tv.genre_ids?.map((genre, index) => (
+                                <Link
+                                  key={index}
+                                  href={`/genre/movie/${genre}-${tvGenresMap.get(
+                                    genre,
+                                  )}`}
+                                >
+                                  <div className="px-3 py-1 text-sm font-medium bg-white/10 hover:bg-white/20 rounded-full border border-white/20 backdrop-blur-sm transition">
+                                    {tvGenresMap.get(genre)}
+                                  </div>
+                                </Link>
+                              ))}
+                            </div>
                           </div>
 
-                          {/* Genres dưới dạng chip */}
-                          <div className="flex flex-wrap gap-2">
-                            {tv.genre_ids?.map((genre, index) => (
-                              <Link
-                                key={index}
-                                href={`/genre/movie/${genre}-${tvGenresMap.get(
-                                  genre
-                                )}`}
-                              >
-                                <div className="px-3 py-1 text-sm font-medium bg-white/10 hover:bg-white/20 rounded-full border border-white/20 backdrop-blur-sm transition">
-                                  {tvGenresMap.get(genre)}
-                                </div>
-                              </Link>
-                            ))}
-                          </div>
+                          {/* Overview */}
+                          <p className="text-sm text-gray-200 mt-2 line-clamp-3">
+                            {tv.overview}
+                          </p>
                         </div>
-
-                        {/* Overview */}
-                        <p className="text-sm text-gray-200 mt-2 line-clamp-3">
-                          {tv.overview}
-                        </p>
                       </div>
-                    </div>
+                    </Link>
                   </SwiperSlide>
                 ))}
 

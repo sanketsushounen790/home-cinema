@@ -19,7 +19,7 @@ export default function TVCommentBox({
   const { user } = useUser();
 
   return (
-    <div className="w-full px-4 mb-[-35px]">
+    <div className="w-full min-h-[210px] px-4 mb-[-35px]">
       {user ? (
         <CommentList
           postId={postId}
