@@ -28,6 +28,22 @@ interface TVSerieLastEpisodeToAir {
   still_path: string;
 }
 
+interface TVSerieNextEpisodeToAir {
+  id: number;
+  name: string;
+  overview: string;
+  vote_average: number;
+  vote_count: number;
+  air_date: string;
+  episode_number: number;
+  episode_type: string;
+  production_code: string;
+  runtime: number;
+  season_number: number;
+  show_id: number;
+  still_path: string;
+}
+
 interface TVSerieNetWork {
   id: number;
   logo_path: string;
@@ -106,7 +122,7 @@ interface TVSerieDetailResult {
   last_air_date: string;
   last_episode_to_air: TVSerieLastEpisodeToAir;
   name: string;
-  next_episode_to_air: null;
+  next_episode_to_air: TVSerieNextEpisodeToAir;
   networks: TVSerieNetWork[];
   number_of_episodes: number;
   number_of_seasons: number;

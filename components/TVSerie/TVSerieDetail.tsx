@@ -34,18 +34,23 @@ import { useQuery } from "@tanstack/react-query";
 import ReleaseDatesModal from "../MovieDetail/ReleaseDatesModal";
 import useTVSerieDetail from "./hook/useTVSerieDetail";
 import cardPlaceholder from "../../assets/card_placeholder.jpg";
+import MovieDetailSkeleton from "../Shared_Components/MovieDetailSkeleton";
+import useTVSerieAggregateCredits from "./hook/useTVSerieAggregateCredits";
 
 // import MovieReleaseDates from "./MovieReleaseDates";
 
 interface TVSerieDetailProps {
   tvId: string;
   //result: TVSerieDetailResult;
-  credits: TVSerieAggregateCreditsResult;
+  //credits: TVSerieAggregateCreditsResult;
 }
 
-const TVSerieDetail = ({ tvId, credits }: TVSerieDetailProps) => {
+const TVSerieDetail = ({ tvId }: TVSerieDetailProps) => {
   const { data: result, isLoading: isTVSerieDetailLoading } =
     useTVSerieDetail(tvId);
+
+  const { data: credits, isLoading: isTVSerieAggregateCreditsLoading } =
+    useTVSerieAggregateCredits(tvId);
 
   const { theme } = useThemeStore();
   const [open, setOpen] = useState(false);
@@ -85,8 +90,11 @@ const TVSerieDetail = ({ tvId, credits }: TVSerieDetailProps) => {
 
   //console.log("releaseDateinSpecifyRegion", resultsInSpecifyRegion);
 
-  if (isTVSerieDetailLoading) {
-    <div className="flex justify-center items-center mt-20">Loading...</div>;
+  console.log(result);
+  //console.log("tv detail credits", credits);
+
+  if (isTVSerieDetailLoading || isTVSerieAggregateCreditsLoading) {
+    return <MovieDetailSkeleton />;
   } else if (!result) {
     <div className="flex justify-center items-center mt-20">No Data</div>;
   } else {
@@ -383,12 +391,14 @@ const TVSerieDetail = ({ tvId, credits }: TVSerieDetailProps) => {
               View All Cast & Crew
             </button>
 
-            <TVCreditsModal
-              open={open}
-              onClose={() => setOpen(false)}
-              cast={credits.cast}
-              crew={credits.crew}
-            />
+            {credits && (
+              <TVCreditsModal
+                open={open}
+                onClose={() => setOpen(false)}
+                cast={credits?.cast}
+                crew={credits?.crew}
+              />
+            )}
           </div>
 
           <br></br>
@@ -514,6 +524,13 @@ const TVSerieDetail = ({ tvId, credits }: TVSerieDetailProps) => {
                   <p>{formatDate(result.last_air_date)}</p>
                 </div>
 
+                {result?.next_episode_to_air && (
+                  <div className="flex justify-start items-start gap-2">
+                    <p className="font-bold">Next Air Date:</p>
+                    <p>{formatDate(result?.next_episode_to_air?.air_date)}</p>
+                  </div>
+                )}
+
                 <div className="flex justify-start items-start gap-2">
                   <p className="font-bold">Last Episode</p>
                 </div>
@@ -524,6 +541,21 @@ const TVSerieDetail = ({ tvId, credits }: TVSerieDetailProps) => {
                     ep={result.last_episode_to_air}
                   />
                 </div>
+
+                {result?.next_episode_to_air && (
+                  <>
+                    <div className="flex justify-start items-start gap-2">
+                      <p className="font-bold">Next Episode</p>
+                    </div>
+
+                    <div className="w-full flex justify-start items-center">
+                      <LastEpisodeToAirItem
+                        tvId={tvId}
+                        ep={result.next_episode_to_air}
+                      />
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>

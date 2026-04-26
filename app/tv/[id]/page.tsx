@@ -10,12 +10,12 @@ interface TVSerieDetailPageProps {
 
 const TVSerieDetailPage = async ({ params }: TVSerieDetailPageProps) => {
   const { id } = await params;
-  const result = await fetchTVSerieDetail("en-US", id);
-  const credits = await fetchTVSerieAggregateCredits(id);
 
-  console.log(credits);
+  //const credits = await fetchTVSerieAggregateCredits(id);
 
-  return <TVSerieDetail tvId={id} credits={credits} />;
+  //console.log(credits);
+
+  return <TVSerieDetail tvId={id} />;
 };
 
 export default TVSerieDetailPage;

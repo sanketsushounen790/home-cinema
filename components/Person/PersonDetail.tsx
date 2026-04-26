@@ -24,6 +24,7 @@ import usePersonDetail from "./hook/usePersonDetail";
 import usePersonExternalIds from "./hook/usePersonExternalIds";
 import { SocialLinks } from "./SocialLinks";
 import { calculateAge } from "@/utils/calculateAge";
+import PersonDetailLoading from "../Shared_Components/PersonDetailLoading";
 
 interface PersonDetailProps {
   //result: PersonDetailResult;
@@ -115,9 +116,7 @@ const PersonDetail = ({ id }: PersonDetailProps) => {
 
   //console.log("keys", keys);
   if (isLoading) {
-    return (
-      <div className="flex justify-center items-center mt-20">Loading...</div>
-    );
+    return <PersonDetailLoading />;
   } else if (!result) {
     return (
       <div className="flex justify-center items-center mt-20">No Data</div>

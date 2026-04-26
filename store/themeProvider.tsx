@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import { useThemeStore } from "./themeStore";
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 export default function ThemeProvider({ children }: Props) {
   const { theme } = useThemeStore();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!theme) return;
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);

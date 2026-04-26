@@ -29,6 +29,7 @@ import fetchMovieVideos from "@/services/MovieDetail/fetchMovieVideos";
 import { useThemeStore } from "@/store/themeStore";
 import useMovieDetail from "./hook/useMovieDetail";
 import cardPlaceholder from "../../assets/card_placeholder.jpg";
+import MovieDetailSkeleton from "../Shared_Components/MovieDetailSkeleton";
 
 interface MovieDetailProps {
   id: string;
@@ -65,7 +66,7 @@ const MovieDetail = ({ id }: MovieDetailProps) => {
 
   // Sử dụng Array.filter() để lọc ra các objects thỏa mãn điều kiện
   const filteredCrew = result?.credits?.crew.filter((member) =>
-    targetJobs.includes(member.job)
+    targetJobs.includes(member.job),
   );
 
   const groupedCrewForImportantRoles = groupCrewById(filteredCrew || []);
@@ -76,7 +77,7 @@ const MovieDetail = ({ id }: MovieDetailProps) => {
   const [currentRegionISOCode, setCurrentRegionISOCode] = useState("US");
   const [selected, setSelected] = useState<CountryRegion>(countryRegions["US"]);
   const [selectedCountryCertificate, setSelectedCountryCertificate] = useState(
-    countryMovieCertificates["US"]
+    countryMovieCertificates["US"],
   );
   const [notfoundCertificatesFlag, setNotfoundCertificatesFlag] =
     useState<boolean>(false);
@@ -120,11 +121,11 @@ const MovieDetail = ({ id }: MovieDetailProps) => {
   console.log("releaseDateinSpecifyRegion", resultsInSpecifyRegion);
 
   function findPrimaryRelease(
-    resultsInSpecifyRegion: MovieReleaseDate | undefined
+    resultsInSpecifyRegion: MovieReleaseDate | undefined,
   ) {
     // 1. **Ưu tiên 1: Tìm đối tượng có Type = 3 (Theatrical)**
     const theatricalRelease = resultsInSpecifyRegion?.release_dates.find(
-      (release) => release.type === 3
+      (release) => release.type === 3,
     );
 
     if (theatricalRelease) {
@@ -134,7 +135,7 @@ const MovieDetail = ({ id }: MovieDetailProps) => {
     // ---
     // 2. **Ưu tiên 2: Nếu không có Type 3, tìm đối tượng có Certification không trống**
     const certifiedRelease = resultsInSpecifyRegion?.release_dates.find(
-      (release) => release.certification
+      (release) => release.certification,
     );
 
     if (certifiedRelease) {
@@ -177,9 +178,7 @@ const MovieDetail = ({ id }: MovieDetailProps) => {
   // console.log(result?.origin_country);
 
   if (isResutlLoading) {
-    return (
-      <div className="flex justify-center items-center mt-20">Loading...</div>
-    );
+    return <MovieDetailSkeleton />;
   } else if (!result) {
     return (
       <div className="flex justify-center items-center mt-20">No Data</div>
@@ -195,7 +194,7 @@ const MovieDetail = ({ id }: MovieDetailProps) => {
             onClose={() => setOpenTrailerModal(false)}
             videos={
               movieVideoData?.results.filter(
-                (v) => v.type === "Trailer" && v.site === "YouTube"
+                (v) => v.type === "Trailer" && v.site === "YouTube",
               ) ?? []
             }
           />
@@ -264,7 +263,7 @@ const MovieDetail = ({ id }: MovieDetailProps) => {
                     <div className="text-[15px]">
                       {formatShortDate(
                         primaryRelease?.release_date as string,
-                        result.origin_country[0]
+                        result.origin_country[0],
                       )}
                     </div>
                     <img
@@ -312,8 +311,8 @@ const MovieDetail = ({ id }: MovieDetailProps) => {
                        result.vote_average >= 7
                          ? "text-green-400 border-green-400"
                          : result.vote_average >= 5
-                         ? "text-yellow-400 border-yellow"
-                         : "text-red-400 border-red"
+                           ? "text-yellow-400 border-yellow"
+                           : "text-red-400 border-red"
                      } `}
                     aria-label={`rating ${result.vote_average}`}
                   >
@@ -457,7 +456,7 @@ const MovieDetail = ({ id }: MovieDetailProps) => {
                         <td className="px-4 py-2 border">
                           {formatShortDate(
                             releaseDates.release_date as string,
-                            "US"
+                            "US",
                           )}
                         </td>
                         <td className="px-4 py-2 border">
@@ -466,7 +465,7 @@ const MovieDetail = ({ id }: MovieDetailProps) => {
                             : releaseDates.note}
                         </td>
                       </tr>
-                    )
+                    ),
                   )}
                 </tbody>
               </table>

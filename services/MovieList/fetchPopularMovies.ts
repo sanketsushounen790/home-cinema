@@ -7,7 +7,7 @@ const fetchPopularMovies = async (language: string, page: number | string) => {
         accept: "application/json",
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_JWT}`,
       },
-    }
+    },
   );
 
   if (!res.ok) {

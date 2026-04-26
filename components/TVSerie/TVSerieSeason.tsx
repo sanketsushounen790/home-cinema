@@ -13,6 +13,7 @@ import EpisodeGroupModal from "./EpisodeGroupModal";
 import { EpisodeGroupItem } from "./EpisodeGroupItem";
 
 import cardPlaceholder from "../../assets/card_placeholder.jpg";
+import useSeasonDetail from "./hook/useSeasonDetail";
 
 interface TVSerieSeasonProps {
   result: TVSerieDetailResult;
@@ -54,6 +55,14 @@ const TVSerieSeason = ({ result }: TVSerieSeasonProps) => {
   });
 
   //console.log("getTVSerieEpisodeGroupsDetail", TVEpisodeGroupsDetailData);
+
+  //   const { data: seasonDetailResult, isLoading: isSeasonDetailResultLoading } = useSeasonDetail(
+  //   String(result?.id),
+  //   result.seasons.,
+  // );
+
+  // console.log("result", result);
+
   return (
     <div className="w-[90%]">
       <div className="flex justify-start items-center gap-3 mb-4">
@@ -210,15 +219,15 @@ const TVSerieSeason = ({ result }: TVSerieSeasonProps) => {
                       href={`/tv/${result.id}/season/${season.season_number}`}
                       className="hover:underline cursor-pointer"
                     >
-                      <button className="btn btn-outline">Detail</button>
+                      <button className="btn btn-outline">Watch Now</button>
                     </Link>
 
-                    <Link
+                    {/* <Link
                       href={`/tv/${result.id}/season/${season.season_number}/episode/1_0`}
                       className="hover:underline cursor-pointer"
                     >
                       <button className="btn btn-outline">Watch Now</button>
-                    </Link>
+                    </Link> */}
                   </div>
                 </div>
               </div>

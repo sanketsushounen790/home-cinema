@@ -14,6 +14,7 @@ import {
   LogOut,
   CirclePlus,
   GlobeIcon,
+  LanguagesIcon,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
@@ -86,7 +87,7 @@ export default function Sidebar() {
       title: wl.title,
       createdAt: wl.createdAt,
       href: `/user/watch-list/${wl.id}`, // dùng id để build route
-    })
+    }),
   );
 
   const handleLogoutUser = async () => {
@@ -252,13 +253,21 @@ export default function Sidebar() {
 
           {/* LANGUAGE */}
           <div className="flex items-center justify-between cursor-pointer">
-            <span>Language</span>
+            <span
+              className="mr-2 pr-6 tooltip transition-colors duration-200 hover:text-blue-500"
+              data-tip="Language"
+            >
+              <LanguagesIcon />
+            </span>
             <LanguageSelect />
           </div>
 
           {/* REGION */}
           <div className="flex items-center justify-between cursor-pointer">
-            <span className="mr-2">
+            <span
+              className="mr-2 pr-6 tooltip transition-colors duration-200 hover:text-blue-500"
+              data-tip="Region"
+            >
               <GlobeIcon />
             </span>
             <DrawerRegionSelect id="global" />

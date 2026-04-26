@@ -5,6 +5,7 @@ import roundUpToDecimal from "@/utils/roundUpToDecimal";
 import Link from "next/link";
 import EpisodeList from "./EpisodeList";
 import useSeasonDetail from "./hook/useSeasonDetail";
+import SeasonDetailSkeleton from "@/components/Shared_Components/SeasonDetailSkeleton";
 
 interface SeasonDetailProps {
   tvId: string;
@@ -20,9 +21,7 @@ const SeasonDetail = ({ tvId, seasonId }: SeasonDetailProps) => {
   console.log(result);
 
   if (isResultLoading) {
-    return (
-      <div className="flex justify-center items-center mt-20">Loading...</div>
-    );
+    return <SeasonDetailSkeleton />;
   } else if (!result) {
     return (
       <div className="flex justify-center items-center mt-20">No Data</div>

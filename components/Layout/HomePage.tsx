@@ -20,11 +20,11 @@ const HomePage = () => {
       <div className="w-full h-auto flex flex-col justify-center items-center mt-5 pb-5">
         <TrendingList />
 
+        <UpcomingList />
+
         <TopRatedList />
 
         <PopularList />
-
-        <UpcomingList />
       </div>
     </div>
   );

@@ -34,7 +34,7 @@ const EpisodeWatchPage = ({
     seasondId,
   );
 
-  //console.log("result", result);
+  // console.log("result", result);
 
   const [currentEpCredits, setCurrentEpCredits] = useState(credits);
 

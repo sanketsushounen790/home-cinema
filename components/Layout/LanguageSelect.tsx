@@ -3,6 +3,7 @@
 import { useLanguageStore } from "@/store/useLanguageStore";
 import isCharsInString from "@/utils/isCharsInString";
 import tmdbLanguages from "@/utils/tmdbLanguages";
+import { ChevronDown } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 interface Props {
@@ -35,22 +36,29 @@ export default function LanguageSelect({ className }: Props) {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
+  console.log(current);
+
   return (
-    <div ref={wrapperRef} className={`relative w-40 ${className}`}>
+    <div
+      ref={wrapperRef}
+      className={`relative w-auto min-w-[200px] ${className}`}
+    >
       {/* Selected */}
 
       {open ? (
         <div className="w-full flex items-center justify-between px-3 py-2 rounded border bg-base-100 hover:bg-base-200 cursor-pointer">
           <input
             type="text"
-            placeholder="Search"
+            placeholder="Search..."
             className="w-[80%] h-[24px] focus:outline-none focus:ring-0 focus:border-base-300"
             onChange={(e) => setSearchTerm(e.target.value)}
           />
 
-          <span onClick={handleToggleOpen} className="text-xs cursor-pointer">
-            ▼
-          </span>
+          <ChevronDown
+            size={18}
+            className={`transition ${open ? "rotate-180" : ""}`}
+            onClick={handleToggleOpen}
+          />
         </div>
       ) : (
         <div
@@ -59,17 +67,22 @@ export default function LanguageSelect({ className }: Props) {
         >
           <button className="w-[80%] cursor-pointer" type="button">
             <span className="h-full flex items-center gap-2">
-              <span>{current?.name}</span>
+              <span>
+                {current?.name ? current?.name : current?.english_name}
+              </span>
             </span>
           </button>
 
-          <span className="text-xs">▼</span>
+          <ChevronDown
+            size={18}
+            className={`transition ${open ? "rotate-180" : ""}`}
+          />
         </div>
       )}
 
       {/* Dropdown */}
       {open && (
-        <div className="absolute z-50 bottom-full mb-1 w-40 h-auto max-h-[350px] overflow-y-auto rounded border bg-base-100 shadow">
+        <div className="absolute z-50 bottom-full mb-1 h-auto w-full max-h-[350px] overflow-y-auto rounded border bg-base-100 shadow">
           {tmdbLanguages
             .filter((opt) => isCharsInString(searchTerm, opt.english_name))
             .map((opt, index) => (

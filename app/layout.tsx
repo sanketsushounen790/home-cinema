@@ -14,7 +14,26 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="light" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+(() => {
+  try {
+    const raw = localStorage.getItem("theme-storage");
+    if (!raw) return;
+    const parsed = JSON.parse(raw);
+    const theme = parsed?.state?.theme;
+    if (theme === "light" || theme === "dark") {
+      document.documentElement.setAttribute("data-theme", theme);
+    }
+  } catch {}
+})();
+            `.trim(),
+          }}
+        />
+      </head>
       <body>
         <ThemeProvider>
           <LayoutWrapper>{children}</LayoutWrapper>

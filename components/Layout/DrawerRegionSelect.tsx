@@ -45,35 +45,55 @@ export function DrawerRegionSelect({ id }: Props) {
   return (
     <div ref={ref} className="relative w-auto min-w-[200px]">
       {/* trigger */}
-      <button
-        type="button"
-        onClick={() => {
-          setInputSearchTerm("");
-          setOpenDropdownId(open ? null : id);
-        }}
-        className="w-full flex items-center justify-between gap-2 px-3 py-2 border rounded bg-base-100 cursor-pointer"
-      >
-        <div className="flex items-center justify-center gap-2">
-          <span>{selected?.name}</span>
+      {open ? (
+        <div className="w-full flex items-center justify-between px-3 py-2 rounded border bg-base-100 hover:bg-base-200 cursor-pointer">
+          <input
+            className="w-[80%] h-[24px] focus:outline-none focus:ring-0 focus:border-base-300"
+            placeholder="Search region..."
+            value={inputSearchTerm}
+            onChange={(e) => setInputSearchTerm(e.target.value)}
+          />
 
-          <img
-            className="w-[22px] h-[17px] border"
-            src={selected?.flag}
-            alt="flag"
+          <ChevronDown
+            size={18}
+            className={`transition ${open ? "rotate-180" : ""}`}
+            onClick={() => {
+              setInputSearchTerm("");
+              setOpenDropdownId(open ? null : id);
+            }}
           />
         </div>
+      ) : (
+        <button
+          type="button"
+          onClick={() => {
+            setInputSearchTerm("");
+            setOpenDropdownId(open ? null : id);
+          }}
+          className="w-full flex items-center justify-between gap-2 px-3 py-2 border rounded bg-base-100 cursor-pointer"
+        >
+          <div className="flex items-center justify-center gap-2">
+            <span>{selected?.name}</span>
 
-        <ChevronDown
-          size={18}
-          className={`transition ${open ? "rotate-180" : ""}`}
-        />
-      </button>
+            <img
+              className="w-[22px] h-[17px] border"
+              src={selected?.flag}
+              alt="flag"
+            />
+          </div>
+
+          <ChevronDown
+            size={18}
+            className={`transition ${open ? "rotate-180" : ""}`}
+          />
+        </button>
+      )}
 
       {/* dropdown */}
       {open && (
         <div
           ref={dropdownRef}
-          className="absolute z-50 bottom-full mb-1 max-h-[400px] overflow-y-auto border rounded bg-base-100 shadow"
+          className="absolute z-50 bottom-full mb-1 w-full max-h-[400px] overflow-y-auto border rounded bg-base-100 shadow"
         >
           {countryRegionsArray
             .filter((opt) => isCharsInString(inputSearchTerm, opt.name))
@@ -96,14 +116,6 @@ export function DrawerRegionSelect({ id }: Props) {
                 />
               </div>
             ))}
-          <div className="p-2">
-            <input
-              className="w-full px-3 py-2 border"
-              placeholder="Search region..."
-              value={inputSearchTerm}
-              onChange={(e) => setInputSearchTerm(e.target.value)}
-            />
-          </div>
         </div>
       )}
     </div>
