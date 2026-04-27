@@ -17,6 +17,7 @@ import { useLanguageStore } from "@/store/useLanguageStore";
 import { motion } from "framer-motion";
 import useTVSeriesCarousel from "./hook/useTVSeriesCarousel";
 import { useRouter } from "next/navigation";
+import CarouselLoading from "../Shared_Components/CarouselLoading";
 
 const MovieCarousel = () => {
   const [mediaType, setMediaType] = useState<string>("movie");
@@ -46,10 +47,14 @@ const MovieCarousel = () => {
   const prevRef = useRef<HTMLDivElement>(null);
   const nextRef = useRef<HTMLDivElement>(null);
 
+  const isCurrentLoading =
+    mediaType === "movie" ? isMoviesLoading : isTVSeriesLoading;
+
   return (
     <div className="relative">
-      <div className="absolute top-[10px] left-[10px] z-100">
-        <div className="relative flex bg-[#e9eef3] rounded-full p-1 w-[180px] overflow-hidden z-20 mb-2">
+      {!isCurrentLoading && (
+        <div className="absolute top-[10px] left-[10px] z-50">
+          <div className="relative flex bg-[#e9eef3] rounded-full p-1 w-[180px] overflow-hidden z-20 mb-2">
           {/* Nền trượt */}
           <motion.div
             layout
@@ -79,15 +84,14 @@ const MovieCarousel = () => {
           >
             TV Series
           </button>
+          </div>
         </div>
-      </div>
+      )}
 
       {mediaType === "movie" ? (
         <div>
           {isMoviesLoading ? (
-            <div className="w-full h-[500px] flex justify-center items-center rounded-2xl bg-base-300 animate-pulse">
-              Loading...
-            </div>
+            <CarouselLoading active="movie" />
           ) : isMoviesError ? (
             <div className="w-full h-[500px] flex justify-center items-center rounded-2xl bg-base-300">
               {moviesError.message}
@@ -256,9 +260,7 @@ const MovieCarousel = () => {
       ) : (
         <div>
           {isTVSeriesLoading ? (
-            <div className="w-full h-[500px] flex justify-center items-center rounded-2xl bg-base-300 animate-pulse">
-              Loading...
-            </div>
+            <CarouselLoading active="tv" />
           ) : isTVSeriesError ? (
             <div className="w-full h-[500px] flex justify-center items-center rounded-2xl bg-base-300">
               {tvSeriesError.message}
