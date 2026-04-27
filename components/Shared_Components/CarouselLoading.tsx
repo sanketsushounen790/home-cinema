@@ -24,7 +24,7 @@ const CarouselLoading = ({ active = "movie" }: { active?: MediaType }) => {
           />
 
           <div className="z-[2] flex-1 py-1.5 flex items-center justify-center">
-            <div className="h-4 w-14 rounded bg-white/20 animate-pulse" />
+            {/* <div className="h-4 w-14 rounded bg-white/20 animate-pulse" /> */}
           </div>
 
           <div className="z-[2] flex-1 py-1.5 flex items-center justify-center">

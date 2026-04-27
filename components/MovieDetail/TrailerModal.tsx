@@ -42,7 +42,7 @@ export default function TrailerModal({
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute -top-3 -right-3 bg-base-100 hover:bg-base-300 rounded-full w-8 h-8 flex items-center justify-center cursor-pointer"
+          className="absolute top-3 right-3 bg-base-100 hover:bg-base-300 rounded-full w-8 h-8 flex items-center justify-center cursor-pointer"
         >
           ✕
         </button>

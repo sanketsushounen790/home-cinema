@@ -6,7 +6,15 @@ import Image from "next/image";
 import cardPlaceholder from "../../assets/card_placeholder.jpg";
 import { clampText } from "@/utils/clampText";
 
-import { CirclePlus, CircleX, Factory, Heart, List, X } from "lucide-react";
+import {
+  CirclePlus,
+  CircleX,
+  Factory,
+  Heart,
+  List,
+  Loader2,
+  X,
+} from "lucide-react";
 import { useState } from "react";
 
 import { useRemoveItemFromWatchlist } from "@/hooks/useRemoveItemFromWatchlist";
@@ -36,7 +44,13 @@ export default function WatchListItemCard({
       {/* Add to list buttons */}
       <div className="absolute flex justify-center items-center gap-2 right-[10px] top-[10px] z-10">
         {isRemoveItemPending ? (
-          <div>Deleting...</div>
+          <span className="inline-flex items-center justify-center rounded-full bg-black/60 ring-1 ring-white/30 p-1">
+            <Loader2
+              className="animate-spin text-white drop-shadow"
+              size={18}
+              aria-label="Deleting"
+            />
+          </span>
         ) : (
           <div
             className="hover:scale-110 transition-transform duration-200 z-20"
@@ -78,10 +92,10 @@ export default function WatchListItemCard({
                        movie.vote_count === 0
                          ? "text-gray-200 border-gray-200"
                          : movie.vote_average >= 7
-                         ? "text-green-400 border-green-400"
-                         : movie.vote_average >= 5
-                         ? "text-yellow-400 border-yellow"
-                         : "text-red-400 border-red"
+                           ? "text-green-400 border-green-400"
+                           : movie.vote_average >= 5
+                             ? "text-yellow-400 border-yellow"
+                             : "text-red-400 border-red"
                      } `}
             aria-label={`rating ${movie.vote_average}`}
           >

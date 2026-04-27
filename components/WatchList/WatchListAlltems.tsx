@@ -2,7 +2,7 @@
 
 import LoadingCard from "../Shared_Components/LoadingCard";
 import { formatTimestamp } from "@/utils/formatTimestamp";
-import { Edit, Trash2 } from "lucide-react";
+import { Edit, Loader2, Trash2 } from "lucide-react";
 
 import WatchListItemCard from "./WatchListItemCard";
 import { useDeleteWatchlist } from "@/hooks/useDeleteWatchlist";
@@ -184,7 +184,11 @@ const WatchListIAlltems = ({ watchlistId }: WatchListIAlltemsProps) => {
                     onClick={handleDeleteWatchlist}
                   >
                     {isDeleteWatchlistPending ? (
-                      "Deleting..."
+                      <Loader2
+                        className="animate-spin text-red-500"
+                        size={20}
+                        aria-label="Deleting"
+                      />
                     ) : (
                       <Trash2 size={20} color="red" />
                     )}

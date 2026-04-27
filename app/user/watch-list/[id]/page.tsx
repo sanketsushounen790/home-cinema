@@ -1,4 +1,4 @@
-import WatchListIAlltems from "@/components/WatchList/WatchListIAlltems";
+import WatchListAlltems from "@/components/WatchList/WatchListAlltems";
 
 interface WatchListPageProps {
   params: {
@@ -9,7 +9,7 @@ interface WatchListPageProps {
 const WatchListPage = async ({ params }: WatchListPageProps) => {
   const { id } = await params;
 
-  return <WatchListIAlltems watchlistId={id} />;
+  return <WatchListAlltems watchlistId={id} />;
 };
 
 export default WatchListPage;
