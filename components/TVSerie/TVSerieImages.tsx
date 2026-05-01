@@ -12,7 +12,7 @@ const TVSerieImages = ({ tvId }: TVSerieImagesProps) => {
     queryFn: () => fetchTVSerieImages(tvId),
   });
 
-  console.log(data);
+  // console.log(data);
 
   if (isLoading) {
     return <div>Loading...</div>;

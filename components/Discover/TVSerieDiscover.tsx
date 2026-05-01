@@ -231,7 +231,7 @@ const TVSerieDiscover = () => {
     },
   });
 
-  console.log(selectedOriginalLanguage);
+  // console.log(selectedOriginalLanguage);
 
   // 3 refs
   const originCountryRef = useRef<HTMLDivElement | null>(null);

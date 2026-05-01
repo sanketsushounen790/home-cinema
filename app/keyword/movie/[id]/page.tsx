@@ -11,8 +11,8 @@ const KeywordDiscoverPage = async ({ params }: KeywordDiscoverPageProps) => {
   const keywordId = id.split("-")[0];
   const keywordName = id.split("-")[1];
 
-  console.log("keywordId", keywordId);
-  console.log("keywordName", keywordName);
+  // console.log("keywordId", keywordId);
+  // console.log("keywordName", keywordName);
 
   return <KeywordDiscover keywordName={keywordName} keywordId={keywordId} />;
 };

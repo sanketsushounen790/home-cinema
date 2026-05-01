@@ -102,7 +102,7 @@ const MovieDetail = ({ id }: MovieDetailProps) => {
     enabled: !isResutlLoading && !!result,
   });
 
-  console.log("release dates", data);
+  // console.log("release dates", data);
   const {
     isLoading: isMovieVideoLoading,
     error: movieVideoError,
@@ -113,12 +113,12 @@ const MovieDetail = ({ id }: MovieDetailProps) => {
     enabled: !isResutlLoading && !!result,
   });
 
-  console.log("movieVideoData", movieVideoData);
+  // console.log("movieVideoData", movieVideoData);
 
   const resultsInSpecifyRegion: MovieReleaseDate | undefined =
     data?.results.find((result) => result.iso_3166_1 === currentRegionISOCode);
 
-  console.log("releaseDateinSpecifyRegion", resultsInSpecifyRegion);
+  // console.log("releaseDateinSpecifyRegion", resultsInSpecifyRegion);
 
   function findPrimaryRelease(
     resultsInSpecifyRegion: MovieReleaseDate | undefined,

@@ -14,7 +14,7 @@ const MovieKeywords = ({ movieId }: MovieKeywords) => {
     queryFn: () => fetchMovieKeywords(movieId),
   });
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <div className="w-[90%] flex flex-col justify-start items-start gap-4 mb-1">

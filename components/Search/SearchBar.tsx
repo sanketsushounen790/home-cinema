@@ -61,7 +61,7 @@ export default function SearchBar() {
     staleTime: Infinity,
   });
 
-  console.log(data?.results);
+  // console.log(data?.results);
   // Debounce 400ms
   useEffect(() => {
     if (!query.trim()) return;

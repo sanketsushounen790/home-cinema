@@ -18,7 +18,7 @@ const Notifications = () => {
   const { theme } = useThemeStore();
   const notifications = useNotifications(user?.uid);
 
-  console.log(notifications);
+  // console.log(notifications);
 
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
@@ -33,7 +33,7 @@ const Notifications = () => {
   const handleClickNotification = (n: any) => {
     markNotificationAsRead(n.id);
 
-    console.log(n);
+    // console.log(n);
 
     if (!n.postId || !n.commentId) return;
 
@@ -67,7 +67,7 @@ const Notifications = () => {
     }
   };
 
-  console.log(notifications);
+  // console.log(notifications);
 
   return (
     <div className="w-full h-[calc(100vh-64px)] flex flex-col justify-start items-center mt-20">

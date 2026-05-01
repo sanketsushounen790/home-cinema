@@ -233,7 +233,7 @@ const MovieDiscover = () => {
     },
   });
 
-  console.log(data);
+  // console.log(data);
 
   // 3 refs
   const originCountryRef = useRef<HTMLDivElement | null>(null);

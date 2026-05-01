@@ -24,7 +24,7 @@ export default function WatchTabs({
 }: WatchTabsProps) {
   const [activeTab, setActiveTab] = useState<"info" | "comments">("comments");
 
-  console.log(episode);
+  // console.log(episode);
 
   return (
     <div className="h-auto mt-4 pb-8 overflow-hidden">

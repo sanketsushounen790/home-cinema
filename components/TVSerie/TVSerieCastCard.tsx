@@ -9,7 +9,7 @@ interface TVSerieCastCardProps {
 }
 
 const TVSerieCastCard = ({ cast }: TVSerieCastCardProps) => {
-  console.log(cast);
+  // console.log(cast);
   return (
     <div className="w-full min-h-[300px] h-auto">
       <div className="">

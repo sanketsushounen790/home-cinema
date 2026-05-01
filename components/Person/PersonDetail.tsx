@@ -36,7 +36,7 @@ const PersonDetail = ({ id }: PersonDetailProps) => {
   const { data: socialLinks, isLoading: isSocialLinksLoading } =
     usePersonExternalIds(id);
 
-  console.log(socialLinks);
+  // console.log(socialLinks);
 
   const { movie, tv } = countMovieAndTV(
     result?.combined_credits || { cast: [], crew: [] }

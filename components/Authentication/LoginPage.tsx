@@ -36,7 +36,7 @@ export default function LoginPage() {
 
       router.push(from);
     } catch (err: any) {
-      console.log(err);
+      // console.log(err);
 
       if (err.code === "auth/account-exists-with-different-credential") {
         setAuthError(
@@ -73,7 +73,7 @@ export default function LoginPage() {
 
       router.push(from);
     } catch (err: any) {
-      console.log(err);
+      // console.log(err);
 
       if (err.code === "auth/account-exists-with-different-credential") {
         setAuthError(
@@ -115,7 +115,7 @@ export default function LoginPage() {
       // ✔ Redirect
       router.push(from);
     } catch (err: any) {
-      console.log(err);
+      // console.log(err);
 
       if (err.code === "auth/account-exists-with-different-credential") {
         setAuthError(

@@ -21,7 +21,7 @@ export const TVSerieRecommendations = ({
     staleTime: Infinity,
   });
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <div className="w-[90%] h-auto flex flex-col justify-start items-center">

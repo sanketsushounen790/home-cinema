@@ -17,7 +17,7 @@ const PopularTVSerieList = () => {
     staleTime: Infinity,
   });
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <div className="w-full h-auto flex flex-col justify-start items-center">

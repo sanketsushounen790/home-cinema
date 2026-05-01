@@ -42,12 +42,12 @@ const MovieReleaseDates = ({ movieId }: MovieReleaseDatesProps) => {
     staleTime: Infinity,
   });
 
-  console.log(data);
+  // console.log(data);
 
   const resultsInSpecifyRegion: MovieReleaseDate | undefined =
     data?.results.find((result) => result.iso_3166_1 === currentRegionISOCode);
 
-  console.log("releaseDateinSpecifyRegion", resultsInSpecifyRegion);
+  // console.log("releaseDateinSpecifyRegion", resultsInSpecifyRegion);
 
   function findPrimaryRelease(
     resultsInSpecifyRegion: MovieReleaseDate | undefined
@@ -78,7 +78,7 @@ const MovieReleaseDates = ({ movieId }: MovieReleaseDatesProps) => {
 
   const primaryRelease = findPrimaryRelease(resultsInSpecifyRegion);
 
-  console.log(primaryRelease);
+  // console.log(primaryRelease);
 
   return (
     <div className="flex justify-start items-center gap-2">

@@ -36,7 +36,7 @@ export default function LanguageSelect({ className }: Props) {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  console.log(current);
+  // console.log(current);
 
   return (
     <div

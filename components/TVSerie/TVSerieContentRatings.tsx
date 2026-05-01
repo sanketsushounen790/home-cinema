@@ -40,12 +40,12 @@ const TVSerieContentRatings = ({ tvId }: TVSerieContentRatingsProps) => {
     staleTime: Infinity,
   });
 
-  console.log(data);
+  // console.log(data);
 
   const resultsInSpecifyRegion: TVSerieContentRating | undefined =
     data?.results.find((result) => result.iso_3166_1 === currentRegionISOCode);
 
-  console.log("releaseDateinSpecifyRegion", resultsInSpecifyRegion);
+  // console.log("releaseDateinSpecifyRegion", resultsInSpecifyRegion);
 
   return (
     <div className="flex justify-start items-center gap-2">

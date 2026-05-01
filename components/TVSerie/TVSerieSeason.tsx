@@ -77,7 +77,7 @@ const TVSerieSeason = ({ result }: TVSerieSeasonProps) => {
             id="episode-groups"
             className="cursor-pointer border border-base-content rounded-md px-2 py-1 bg-base-100"
             onChange={(e: any) => {
-              console.log("value", e.target.value);
+              // console.log("value", e.target.value);
               setCurrentTvEpisodeGroupId(e.target.value);
               if (currentTvEpisodeGroupId !== "") {
                 queryClient.invalidateQueries({

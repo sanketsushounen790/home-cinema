@@ -12,8 +12,8 @@ const GenreDiscoverTVPage = async ({ params }: GenreDiscoverTVPageProps) => {
   const genreId = id.split("-")[0];
   const genreName = id.split("-")[1];
 
-  console.log("genreId", genreId);
-  console.log("genreName", genreName);
+  // console.log("genreId", genreId);
+  // console.log("genreName", genreName);
 
   return <GenreDiscoverTV genreName={genreName} genreId={genreId} />;
 };

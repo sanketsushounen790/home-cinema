@@ -14,7 +14,7 @@ const TVSerieKeywords = ({ tvId }: TVSerieKeywordsProps) => {
     queryFn: () => fetchTVSerieKeywords(tvId),
   });
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <div className="w-[90%] flex flex-wrap justify-start items-center gap-2 text-black">

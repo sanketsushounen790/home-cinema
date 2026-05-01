@@ -17,7 +17,7 @@ export default function DateTimePicker({
 }: DateTimePickerProps) {
   const today = new Intl.DateTimeFormat("en-CA").format(new Date());
 
-  console.log(value);
+  // console.log(value);
 
   return (
     <div className="relative w-full flex items-center gap-2 cursor-pointer">

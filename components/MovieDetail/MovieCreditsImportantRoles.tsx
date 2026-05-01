@@ -7,7 +7,7 @@ interface MovieCreditsImportantRolesProps {
 const MovieCreditsImportantRoles = ({
   crew,
 }: MovieCreditsImportantRolesProps) => {
-  console.log(crew);
+  // console.log(crew);
 
   return (
     <div className="w-full flex flex-wrap justify-start items-center gap-4">

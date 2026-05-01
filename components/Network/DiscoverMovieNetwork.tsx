@@ -25,7 +25,7 @@ const DiscoverMovieNetwork = ({
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
     useDiscoverMovieByNetwork(networkId, networkName);
 
-  console.log(networkDetail);
+  // console.log(networkDetail);
 
   return (
     <div className="w-full h-auto">

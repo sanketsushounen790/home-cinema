@@ -204,7 +204,7 @@ const TVCreditsPage = async ({ params }: TVCreditsPageProps) => {
 
   const result = await handler();
 
-  console.log(result);
+  // console.log(result);
 
   return (
     <div className="w-full flex flex-col justify-center items-center py-8">

@@ -9,7 +9,7 @@ const AiringTodayTVSeries = () => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
     useAiringTodayTVSeries();
 
-  console.log(data);
+  // console.log(data);
   const tvArraylength: number = data?.pages[0]?.results.length as number;
 
   return (

@@ -18,7 +18,7 @@ const SeasonDetail = ({ tvId, seasonId }: SeasonDetailProps) => {
     seasonId
   );
 
-  console.log(result);
+  // console.log(result);
 
   if (isResultLoading) {
     return <SeasonDetailSkeleton />;

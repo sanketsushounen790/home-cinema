@@ -82,7 +82,7 @@ const TVSerieDetail = ({ tvId }: TVSerieDetailProps) => {
     enabled: !isTVSerieDetailLoading && !!result,
   });
 
-  console.log("resultTVDetail", result);
+  // console.log("resultTVDetail", result);
   //console.log("TVSerieContentRatings", data);
 
   const resultsInSpecifyRegion: TVSerieContentRating | undefined =
@@ -90,7 +90,7 @@ const TVSerieDetail = ({ tvId }: TVSerieDetailProps) => {
 
   //console.log("releaseDateinSpecifyRegion", resultsInSpecifyRegion);
 
-  console.log(result);
+  // console.log(result);
   //console.log("tv detail credits", credits);
 
   if (isTVSerieDetailLoading || isTVSerieAggregateCreditsLoading) {
