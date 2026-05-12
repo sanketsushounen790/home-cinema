@@ -4,7 +4,6 @@ import { useSearchParams, useRouter } from "next/navigation";
 import {
   GoogleAuthProvider,
   GithubAuthProvider,
-  FacebookAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
 import { auth } from "@/lib/firebase/client";
@@ -40,16 +39,16 @@ export default function LoginPage() {
 
       if (err.code === "auth/account-exists-with-different-credential") {
         setAuthError(
-          "Email này đã được sử dụng. Vui lòng đăng nhập bằng phương thức trước đó."
+          "This email is already in use. Please sign in using your previous method."
         );
         return;
       }
 
       if (err.code === "auth/popup-closed-by-user") {
-        return; // user tự đóng popup → không cần báo lỗi
+        return; // user closed popup → no error reported
       }
 
-      setAuthError("Đăng nhập Google thất bại. Vui lòng thử lại.");
+      setAuthError("Google sign-in failed. Please try again.");
     }
   };
 
@@ -77,7 +76,7 @@ export default function LoginPage() {
 
       if (err.code === "auth/account-exists-with-different-credential") {
         setAuthError(
-          "Email này đã được sử dụng. Vui lòng đăng nhập bằng phương thức trước đó."
+          "This email is already in use. Please sign in using your previous method."
         );
         return;
       }
@@ -86,47 +85,10 @@ export default function LoginPage() {
         return;
       }
 
-      setAuthError("Đăng nhập GitHub thất bại. Vui lòng thử lại.");
+      setAuthError("GitHub sign-in failed. Please try again.");
     }
   };
 
-  const handleLoginWithFacebook = async () => {
-    try {
-      setAuthError(null);
-
-      const provider = new FacebookAuthProvider();
-      provider.addScope("public_profile");
-      // ❌ KHÔNG dùng email
-      // provider.addScope("email");
-
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-
-      // Lấy ID token
-      const idToken = await user.getIdToken();
-
-      // Gửi token lên API
-      await fetch("/api/auth/session", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ idToken }),
-      });
-
-      // ✔ Redirect
-      router.push(from);
-    } catch (err: any) {
-      // console.log(err);
-
-      if (err.code === "auth/account-exists-with-different-credential") {
-        setAuthError(
-          "Email này đã được sử dụng. Vui lòng đăng nhập bằng phương thức trước đó."
-        );
-        return;
-      }
-
-      setAuthError("Đăng nhập thất bại. Vui lòng thử lại.");
-    }
-  };
 
   return (
     <div
@@ -139,7 +101,7 @@ export default function LoginPage() {
     >
       <div className="min-h-full flex items-center justify-center bg-black/40">
         <div className="bg-base-100 backdrop-blur-sm p-10 rounded-xl shadow-xl w-full max-w-sm">
-          <h2 className="text-2xl font-bold text-center mb-6">Đăng nhập</h2>
+          <h2 className="text-2xl font-bold text-center mb-6">Sign In</h2>
 
           <button
             onClick={handleLoginWithGoogle}
@@ -153,21 +115,9 @@ export default function LoginPage() {
               src="https://img.icons8.com/color/48/google-logo.png"
               alt="google-logo"
             />
-            <span className="text-gray-700">Đăng nhập với Google</span>
+            <span className="text-gray-700">Sign in with Google</span>
           </button>
 
-          <button
-            onClick={handleLoginWithFacebook}
-            className="mt-3 w-full flex items-center gap-3 bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition cursor-pointer"
-          >
-            <img
-              width="24"
-              height="24"
-              src="https://img.icons8.com/color/48/facebook-new.png"
-              alt="facebook-new"
-            />
-            <span>Đăng nhập với Facebook</span>
-          </button>
 
           <button
             onClick={handleLoginWithGithub}
@@ -179,7 +129,7 @@ export default function LoginPage() {
               src="https://img.icons8.com/material-rounded/24/github.png"
               alt="github"
             />
-            <span>Đăng nhập với GitHub</span>
+            <span>Sign in with GitHub</span>
           </button>
 
           {authError && (
